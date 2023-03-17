@@ -1,0 +1,65 @@
+<DOCTYPE HTML>
+    <html>
+        
+        <head>
+            <meta charset="UTF-8">
+            <title>Retosdeprogramacion.com - Reto #11</title>
+            <style>
+                body{
+                    background-color: rgb(16,185,129);
+                    font-family: 'Trebuchet MS';
+                }
+                #INP_url{
+                    display: block;
+                    width: 50%;
+                    height: 25px;
+                }
+                #BTN_getValores{
+                    background-color: rgb(3,105,161);
+                    color: gainsboro;
+                    height: 35px;
+                }
+            </style>
+        </head>
+        <body>
+            <h1>Desafío retosdeprogramacion.com</h1>
+            <h3>Reto #11</h3>
+            <input type="text" name="INP_url" id="INP_url"></input>            
+            <button id="BTN_getvalores">Obtener valores</button>
+            <br>
+            <p>Output:</p>
+            <textarea name="TXT_output" id="TXT_output" cols="30" rows="10" readonly="readonly"></textarea>
+        </body>
+        <script>
+            // Evento que ocurre al hacer clic en el botón "Obtener valores"
+            document.getElementById('BTN_getvalores').onclick = function(){
+                getParametrosURL(document.getElementById('INP_url').value)
+            }
+
+            // Función que permite obtener los valores de los parámetros de una URL
+            function getParametrosURL(inputUrl) {
+                let outputParametros = []
+                let param = ''
+                let trigger = -1
+                for(var i=0;i<inputUrl.length;i++){
+                    if ((inputUrl[i] == '&')) {
+                        outputParametros.push(param)
+                        trigger = 0
+                        param = ''
+                    }
+                    if (trigger==1) {
+                        param += inputUrl[i]
+                    }
+                    if(inputUrl[i] == '=') {
+                        trigger = 1
+                    }
+                }
+                outputParametros.push(param)
+
+                document.getElementById('TXT_output').value = outputParametros
+                console.log(outputParametros)
+            }
+        </script>
+    </html>
+
+</DOCTYPE>
